@@ -1,83 +1,154 @@
--- --------------------------------------------------------
--- Host:                         127.0.0.1
--- Server version:               10.4.21-MariaDB - mariadb.org binary distribution
--- Server OS:                    Win64
--- HeidiSQL Version:             11.3.0.6295
--- --------------------------------------------------------
+-- phpMyAdmin SQL Dump
+-- version 4.9.1
+-- https://www.phpmyadmin.net/
+--
+-- Host: localhost
+-- Generation Time: Dec 10, 2021 at 09:28 AM
+-- Server version: 8.0.18
+-- PHP Version: 7.3.11
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
+SET time_zone = "+00:00";
+
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET NAMES utf8 */;
-/*!50503 SET NAMES utf8mb4 */;
-/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
-/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
-/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
 
+--
+-- Database: `disaster`
+--
 
--- Dumping database structure for ci3_bencana
-CREATE DATABASE IF NOT EXISTS `ci3_bencana` /*!40100 DEFAULT CHARACTER SET utf8mb4 */;
-USE `ci3_bencana`;
+-- --------------------------------------------------------
 
--- Dumping structure for table ci3_bencana.bencana
-CREATE TABLE IF NOT EXISTS `bencana` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+--
+-- Table structure for table `bencana`
+--
+
+CREATE TABLE `bencana` (
+  `id` int(11) NOT NULL,
   `judul_bencana` varchar(255) DEFAULT NULL,
   `jenis_bencana_id` int(11) NOT NULL,
   `latitude` varchar(50) DEFAULT NULL,
   `longitude` varchar(50) DEFAULT NULL,
-  `deskripsi_bencana` text DEFAULT NULL,
-  `photo_bencana` text DEFAULT NULL,
+  `deskripsi_bencana` text,
+  `photo_bencana` text,
   `tanggal_kejadian` date DEFAULT NULL,
-  `alamat` text DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `FK_bencana_jenis_bencana` (`jenis_bencana_id`),
-  CONSTRAINT `FK_bencana_jenis_bencana` FOREIGN KEY (`jenis_bencana_id`) REFERENCES `jenis_bencana` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8mb4;
+  `alamat` text
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Dumping data for table ci3_bencana.bencana: ~5 rows (approximately)
-DELETE FROM `bencana`;
-/*!40000 ALTER TABLE `bencana` DISABLE KEYS */;
+--
+-- Dumping data for table `bencana`
+--
+
 INSERT INTO `bencana` (`id`, `judul_bencana`, `jenis_bencana_id`, `latitude`, `longitude`, `deskripsi_bencana`, `photo_bencana`, `tanggal_kejadian`, `alamat`) VALUES
-	(3, 'Banjir di Jakarta', 1, '-6.237236443335462', '106.79380136080576', 'Banjir setinggi 25 cm', 'banjir.jpeg', '2021-12-04', NULL),
-	(4, 'Angin Kencang di Bogor', 1, '-6.60030434422267', '106.8049355177827', 'Atap warga rusak', 'angin.jpg', '2021-12-06', NULL),
-	(8, 'Kekeringan di Gunung Kidul', 3, '-7.984321676703807', '110.56613055193596', 'Warga kesulitan air minum', 'kekeringan.jpg', '2021-12-07', NULL),
-	(11, 'Gelombang Tinggi di Cilacap', 2, '-7.695952842689874', '108.9630749163863', 'Gelombang tinggi setinggi 1 meter', 'gelombang1.jpg', '2021-12-09', 'Jl. Cilacap'),
-	(12, 'Banjir Bandang di Sintang', 1, '0.33778254745377595', '111.42119361106631', 'Banjir bandang merendam 7 desa', '1aecaeaf-15f2-4677-88dd-c6fb3f2ede56.jpeg', '2021-12-23', 'Jl. Sintang Jaya');
-/*!40000 ALTER TABLE `bencana` ENABLE KEYS */;
+(3, 'Banjir di Jakarta', 1, '-6.237236443335462', '106.79380136080576', 'Banjir setinggi 25 cm', 'banjir.jpeg', '2021-12-04', NULL),
+(4, 'Angin Kencang di Bogor', 1, '-6.60030434422267', '106.8049355177827', 'Atap warga rusak', 'angin.jpg', '2021-12-06', NULL),
+(8, 'Kekeringan di Gunung Kidul', 3, '-7.984321676703807', '110.56613055193596', 'Warga kesulitan air minum', 'kekeringan.jpg', '2021-12-07', NULL),
+(11, 'Gelombang Tinggi di Cilacap', 2, '-7.695952842689874', '108.9630749163863', 'Gelombang tinggi setinggi 1 meter', 'gelombang1.jpg', '2021-12-09', 'Jl. Cilacap'),
+(12, 'Banjir Bandang di Sintang', 1, '0.33778254745377595', '111.42119361106631', 'Banjir bandang merendam 7 desa', '1aecaeaf-15f2-4677-88dd-c6fb3f2ede56.jpeg', '2021-12-23', 'Jl. Sintang Jaya'),
+(23, 'Kebakaran Hutan', 1, '0.656461', '102.2405593', 'Telah terjadi kebakaran hutan di Riau', 'kebakaran.png', '2021-12-01', 'Riau Timur');
 
--- Dumping structure for table ci3_bencana.jenis_bencana
-CREATE TABLE IF NOT EXISTS `jenis_bencana` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `jenis_bencana` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4;
+-- --------------------------------------------------------
 
--- Dumping data for table ci3_bencana.jenis_bencana: ~2 rows (approximately)
-DELETE FROM `jenis_bencana`;
-/*!40000 ALTER TABLE `jenis_bencana` DISABLE KEYS */;
+--
+-- Table structure for table `jenis_bencana`
+--
+
+CREATE TABLE `jenis_bencana` (
+  `id` int(11) NOT NULL,
+  `jenis_bencana` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `jenis_bencana`
+--
+
 INSERT INTO `jenis_bencana` (`id`, `jenis_bencana`) VALUES
-	(1, 'Hidrometeorologi'),
-	(2, 'Gempa Bumi'),
-	(3, 'Iklim'),
-	(4, 'Vulkanik');
-/*!40000 ALTER TABLE `jenis_bencana` ENABLE KEYS */;
+(1, 'Hidrometeorologi'),
+(2, 'Gempa Bumi'),
+(3, 'Iklim'),
+(4, 'Vulkanik');
 
--- Dumping structure for table ci3_bencana.users
-CREATE TABLE IF NOT EXISTS `users` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `users`
+--
+
+CREATE TABLE `users` (
+  `id` int(11) NOT NULL,
   `nama` varchar(255) DEFAULT NULL,
   `email` varchar(255) DEFAULT NULL,
-  `password` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
+  `password` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Dumping data for table ci3_bencana.users: ~0 rows (approximately)
-DELETE FROM `users`;
-/*!40000 ALTER TABLE `users` DISABLE KEYS */;
+--
+-- Dumping data for table `users`
+--
+
 INSERT INTO `users` (`id`, `nama`, `email`, `password`) VALUES
-	(1, 'Karisma', 'karisma@email.com', 'bb77940377ca1f968647f863b29ee71c');
-/*!40000 ALTER TABLE `users` ENABLE KEYS */;
+(2, 'khoeri', 'khoeri@kmail.com', '1d9c2f832603a2c312fb2739afa0eede');
 
-/*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
-/*!40014 SET FOREIGN_KEY_CHECKS=IFNULL(@OLD_FOREIGN_KEY_CHECKS, 1) */;
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `bencana`
+--
+ALTER TABLE `bencana`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `FK_bencana_jenis_bencana` (`jenis_bencana_id`);
+
+--
+-- Indexes for table `jenis_bencana`
+--
+ALTER TABLE `jenis_bencana`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `bencana`
+--
+ALTER TABLE `bencana`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+
+--
+-- AUTO_INCREMENT for table `jenis_bencana`
+--
+ALTER TABLE `jenis_bencana`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `users`
+--
+ALTER TABLE `users`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `bencana`
+--
+ALTER TABLE `bencana`
+  ADD CONSTRAINT `FK_bencana_jenis_bencana` FOREIGN KEY (`jenis_bencana_id`) REFERENCES `jenis_bencana` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+COMMIT;
+
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40111 SET SQL_NOTES=IFNULL(@OLD_SQL_NOTES, 1) */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
