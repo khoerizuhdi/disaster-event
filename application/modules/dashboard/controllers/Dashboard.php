@@ -29,12 +29,20 @@ class Dashboard extends CI_Controller
 
     public function index() //menampilkan halaman home
     {
+        $data['title'] = 'Peta Bencana | Dashboard';
+
+        $this->load->view('navbar', $data);
+        $this->load->view('d_index');
+        $this->load->view('footer');
+    }
+    
+    public function test() //menampilkan halaman home
+    {
         $data['title'] = 'Peta Bencana | Home';
 
-        $this->load->view('t_navbar', $data);
-        $this->load->view('d_index');
-        $this->load->view('t_footer');
+        $this->load->view('dashboard', $data);
     }
+
 
     public function get_bencana() //menarik data untuk halaman home
     {
@@ -61,9 +69,9 @@ class Dashboard extends CI_Controller
 
             $data['jenis_bencana'] = $this->db->get('jenis_bencana')->result_array();
 
-            $this->load->view('t_navbar', $data);
+            $this->load->view('navbar', $data);
             $this->load->view('d_management');
-            $this->load->view('t_footer');
+            $this->load->view('footer');
         } else {
             $config['upload_path']          = './uploads/';
             $config['allowed_types']        = 'jpeg|jpg|png';
@@ -95,7 +103,7 @@ class Dashboard extends CI_Controller
             $this->m_bencana->add_bencana($data_bencana);
 
             $this->session->set_flashdata('success', 'Data berhasil ditambahkan.'); //buat alert
-            redirect('management');
+            redirect('daftar_bencana');
         }
     }
 
@@ -105,7 +113,7 @@ class Dashboard extends CI_Controller
             $this->m_bencana->delete_bencana($id); //delete data di tabel bencana yg memiliki id tertentu
 
             $this->session->set_flashdata('success', 'Data berhasil dihapus.'); //buat alert
-            redirect('management');
+            redirect('daftar_bencana');
         } else {
             redirect(base_url());
         }
@@ -124,9 +132,9 @@ class Dashboard extends CI_Controller
             // var_dump($data);
             // die();
 
-            $this->load->view('t_navbar', $data);
+            $this->load->view('navbar', $data);
             $this->load->view('d_management_edit');
-            $this->load->view('t_footer');
+            $this->load->view('footer');
             //cetak dalam bentuk json
             // echo json_encode($bencana);
         } else {
@@ -153,9 +161,9 @@ class Dashboard extends CI_Controller
             //menggunakan model untuk menarik data yg ada di tabel jenis_bencana
             $data['jenis_bencana'] = $this->db->get('jenis_bencana')->result_array();
 
-            $this->load->view('t_navbar', $data);
+            $this->load->view('navbar', $data);
             $this->load->view('d_management_edit');
-            $this->load->view('t_footer');
+            $this->load->view('footer');
         } else {
             $config['upload_path']          = './uploads/';
             $config['allowed_types']        = 'jpeg|jpg|png';
@@ -193,7 +201,7 @@ class Dashboard extends CI_Controller
             $this->m_bencana->edit_bencana($id, $data_bencana);
 
             $this->session->set_flashdata('success', 'Data berhasil diubah.'); //buat alert
-            redirect('management');
+            redirect('daftar_bencana');
         }
     }
 
@@ -204,9 +212,9 @@ class Dashboard extends CI_Controller
 
             $data['jenis_bencana'] = $this->db->get('jenis_bencana')->result_array();
 
-            $this->load->view('t_navbar', $data);
+            $this->load->view('navbar', $data);
             $this->load->view('d_management');
-            $this->load->view('t_footer');
+            $this->load->view('footer');
         } else {
             redirect(base_url());
         }
@@ -227,7 +235,7 @@ class Dashboard extends CI_Controller
             $row[] = $field->latitude;
             $row[] = $field->longitude;
             $row[] = $field->tanggal_kejadian;
-            $row[] = '<a href="' . base_url('edit/' . $field->id) . '"class="btn btn-sm btn-primary">Edit</a>' . ' ' . '<a href="' . base_url('delete/' . $field->id) . '"class="btn btn-sm btn-danger">Delete</a>';
+            $row[] = '<a href="' . base_url('edit/' . $field->id) . '"class="btn btn-sm btn-success fas fa-edit"></a>' . ' ' . '<a href="' . base_url('delete/' . $field->id) . '"class="btn btn-sm btn-danger fas fa-trash"></a>';
 
             $data[] = $row;
         }
@@ -247,9 +255,9 @@ class Dashboard extends CI_Controller
         if ($this->session->userdata('is_login') == true) {
             $data['title'] = 'Peta Bencana | REST API';
 
-            $this->load->view('t_navbar', $data);
+            $this->load->view('navbar', $data);
             $this->load->view('d_rest_api');
-            $this->load->view('t_footer');
+            $this->load->view('footer');
         } else {
             redirect(base_url());
         }

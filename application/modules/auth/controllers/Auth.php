@@ -24,7 +24,7 @@ class Auth extends CI_Controller
         if ($this->session->userdata('is_login') == true) {
             redirect(base_url());
         } else {
-            $this->load->view('index');
+            $this->load->view('signin');
         }
     }
 
@@ -39,7 +39,7 @@ class Auth extends CI_Controller
         $this->form_validation->set_rules('password', 'Password', 'required');
 
         if ($this->form_validation->run() == FALSE) {
-            $this->load->view('index');
+            $this->load->view('login');
         } else {
             $this->db->select('*');
             $this->db->from('users');
@@ -52,7 +52,7 @@ class Auth extends CI_Controller
                 $this->session->set_userdata('name', $user->nama);
 
                 $this->session->set_flashdata('success', 'Sign In Berhasil');
-                redirect(base_url());
+                redirect('peta');
             } else {
                 $this->session->set_flashdata('failed', 'Email/Password Salah!');
                 redirect('login');
@@ -63,8 +63,9 @@ class Auth extends CI_Controller
     public function logout_proses()
     {
         $this->session->set_userdata('is_login', false);
+        $this->session->unset_userdata('name');
 
         $this->session->set_flashdata('success', 'Sign Out Berhasil');
-        redirect(base_url());
+        redirect('login');
     }
 }

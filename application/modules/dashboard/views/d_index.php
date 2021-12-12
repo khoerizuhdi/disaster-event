@@ -1,22 +1,11 @@
-<div class="page-header text-dark d-print-none">
-    <div class="row align-items-center">
 
-        <div class="col">
-            <h2 class="page-title">
-                Home
-            </h2>
-        </div>
-
-    </div>
-</div>
-</div>
 <div class="page-body">
     <div class="container-xl">
         <div class="row row-deck row-cards">
-            <div class="col-12">
+            <div class="col-12 mt-4">
                 <div class="card">
                     <div class="card-header">
-                        <h3 class="card-title">Peta Bencana</h3>
+                        <h3 class="card-title">Peta Sebaran Bencana</h3>
                     </div>
                     <div id="map" style="height:470px;"></div>
                 </div>

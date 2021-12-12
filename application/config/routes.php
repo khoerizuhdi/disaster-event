@@ -49,13 +49,14 @@ defined('BASEPATH') or exit('No direct script access allowed');
 | Examples:	my-controller/index	-> my_controller/index
 |		my-controller/my-method	-> my_controller/my_method
 */
-$route['default_controller'] = 'dashboard';
+$route['default_controller'] = 'auth';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 
 //custom routing
-$route['management']['get'] = 'dashboard/management';
-$route['rest_api']['get'] = 'dashboard/rest_api';
+$route['peta']['get'] = 'dashboard/index';
+$route['daftar_bencana']['get'] = 'dashboard/management';
+$route['api']['get'] = 'dashboard/rest_api';
 $route['delete/(:num)']['get'] = 'dashboard/delete_bencana/$1';
 $route['edit/(:num)']['get'] = 'dashboard/edit_bencana/$1';
 
